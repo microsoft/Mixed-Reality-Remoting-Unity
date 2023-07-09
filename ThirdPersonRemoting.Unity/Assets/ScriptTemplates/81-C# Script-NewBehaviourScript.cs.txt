@@ -1,0 +1,13 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+
+using UnityEngine;
+
+    #ROOTNAMESPACEBEGIN#
+/// <summary>
+/// TODO: Class description.
+/// </summary>
+public class #SCRIPTNAME# : MonoBehaviour
+{
+	#NOTRIM#
+}
+    #ROOTNAMESPACEEND#
