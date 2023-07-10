@@ -14,11 +14,11 @@
 # Features
 * Preview Unity content, in play mode, on HoloLens and Android phones - no need to build! 
 * Integrates with existing Unity projects
-* All-in-one editor tooling calibration and recording
-* Project-agnostic mobile companion app
+* All-in-one editor tooling for setup, calibration and recording
+* Mobile companion app
 * Record video
 
-Similar to [Holographic Remoting](https://learn.microsoft.com/en-us/azure/remote-rendering/how-tos/unity/holographic-remoting) - but instead of being limited to HoloLens devices, you can also join on an AR-enabled Android device (thus enabling third person POV, from the perspective of the HoloLens)
+Similar to [Holographic Remoting](https://learn.microsoft.com/en-us/azure/remote-rendering/how-tos/unity/holographic-remoting) - but without the limitation of viewing from a single HoloLens - you can also join on an AR-enabled Android device (thus enabling third person POV, from the perspective of the HoloLens)
 
 <br />
 
@@ -40,9 +40,9 @@ Unity Editor tooling for connecting devices and recording
 
 
 # Installation
-The <i>host</i> components are available as UPM packages
-The Android companion app - mr-mobile-remoting-client-[version].apk 
-<!-- TODO - update for GitHub Both are available in [Mobile Remoting Pipeline Artifacts](TODO) -->
+The <i>host</i> components are available as UPM packages  
+The Android companion app - mr-mobile-remoting-client-[version].apk  
+Both Unity package and Android .apk are available in this project's [Releases](https://github.com/microsoft/Mixed-Reality-Remoting-Unity/releases)
 
 ## In your Unity project: 
 ### 1. Import and Setup MRTK via the Features Tool
@@ -57,12 +57,9 @@ Skip this step if your project is already setup for HoloLens dev.
 * (In Unity) Window > Package Manager > Add package from tarball...  
   ![Add package from tarball](Images/UpmAddTarPackage.png)
 * Commit all changes to git (including the package saved to <code>Packages</code>)
-
-### 3. Install Microsoft.MixedReality.QR via Nuget
-*  https://www.nuget.org/Packages/Microsoft.MixedReality.QR
-
-### 4. Install MR Mobile via Unity Package Manager
-* Download <code>com.microsoft.mixedrealitystudios.mr-mobile-remoting.*</code> (where * is your desired version) from the [Releases](/Releases/) folder
+  
+### 3. Install MR Mobile via Unity Package Manager
+* Download <code>com.microsoft.mixedrealitystudios.mr-mobile-remoting.*</code> (where * is your desired version) from the [Releases](https://github.com/microsoft/Mixed-Reality-Remoting-Unity/releases) page
 * Follow same steps in step 2. 
 
 ## On your Android phone:
@@ -78,7 +75,7 @@ Skip this step if your project is already setup for HoloLens dev.
 
 ## 2. Build the Android app
 Ensure you have the Android build tools installed via the Unity Hub.
-* Open the ThirdPersonMobile.unity project.
+* Open the MR-Remoting-Android-App.unity project.
 * Modify the IP address in NodeDssSignaler
 * Build and Run
   
@@ -94,7 +91,7 @@ Ensure you have the Android build tools installed via the Unity Hub.
 * AR compatible Android device (tested on Pixel 4)
 
 # Contributing
-## Publishing changes to MR Mobile Remoting Host (<code>ThirdPersonRemoting.Unity</code> project)
+## Publishing changes to MR Mobile Remoting Host (<code>MR-Remoting-Host.Unity</code> project)
 ### 1. Modify directly from the Packages folder. Unity and Intellisense should all work as expected
 ### 2. Increment version
 * Select <code>Packages/MR Mobile Remoting/readme</code> and increment the version number using semantic versioning  
@@ -108,8 +105,9 @@ Ensure you have the Android build tools installed via the Unity Hub.
 ### 4. Create git tag
 * Use DevOps to create a tag with the version number as the name
 
-## Publishing changes to Android AR app (<code>ThirdPersonMobile.Unity</code> project)
-TODO
+## Publishing changes to Android AR app (<code>MR-Remoting-Android-App.Unity</code> project)
+### 1. Build .apk from Unity
+### 2. Upload to Releases
 
 # Architecture
 Everything is rendered inside Unity. Once connected, the mobile app sends its [Pose](https://docs.unity3d.com/ScriptReference/Pose.html) to Unity. Unity uses this data to update a Camera's position and rotation, and responds with the resultant image taken from that new point of view. This image is rendered at full screen, given the impression that the mobile phone is in the same "world" as the HoloLens app.

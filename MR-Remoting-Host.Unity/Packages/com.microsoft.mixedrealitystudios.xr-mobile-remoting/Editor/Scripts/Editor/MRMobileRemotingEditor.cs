@@ -162,7 +162,7 @@ namespace MobileHolographicRemoting
                 EditorGUILayout.LabelField("1. Run the WebRTC signalling server running on this PC. You can use the tool below (see section \"Connection\")");
                 EditorGUILayout.LabelField("2. (Optional) Connect the HoloLens to Holographic Remoting. Window > XR > Holographic Remoting for Play Mode");
                 EditorGUILayout.LabelField("3. Hit play mode in this Editor");
-                EditorGUILayout.LabelField("4. On mobile app: Enter this computer's IP address and tap \"Join\" on the ThirdPersonMobile app");
+                EditorGUILayout.LabelField("4. On mobile app: Enter this computer's IP address and tap \"Join\" on the companion app");
 
                 EndVerticalPadded();
             }
@@ -294,7 +294,7 @@ namespace MobileHolographicRemoting
                 GUI.enabled = true;
 
                 GUILayout.EndHorizontal();
-                
+
                 EndVerticalPadded();
             }
 
@@ -442,7 +442,7 @@ namespace MobileHolographicRemoting
 
         private String GetMobileRecordingPath()
         {
-            return "[Phone Storage]/Android/data/com.Microsoft.ThirdPersonMobile.Unity/CameraCapture";
+            return "[Phone Storage]/Android/data/com.Microsoft.MR-Remoting-Android-App.Unity/CameraCapture";
         }
 
         private void OnPressLocateNodeDssFolder()

@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Packages/com.microsoft.mixedrealitystudios.xr-mobile-remoting/Editor/Scenes/MobileHolographicRemotingHost
+    path: Packages/com.microsoft.mixedrealitystudios.mr-mobile-remoting/Editor/Scenes/MobileHolographicRemotingHost
       Example.unity
     guid: 27f76452fc8d6f741a2940ac2cfceff9
   m_configObjects:
