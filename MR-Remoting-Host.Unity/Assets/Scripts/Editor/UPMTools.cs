@@ -48,8 +48,6 @@ namespace MobileHolographicRemoting
 
         private static void CreatePackage(string targetFolder)
         {
-            NugetForUnity.NugetHelper.Restore();
-
             string packageFolder = Path.GetFullPath(PathToPackage);
 
             EditorApplication.update += EditorUpdate;
