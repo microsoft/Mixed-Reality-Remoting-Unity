@@ -1,6 +1,5 @@
 <center>
 
-  ![Logo](Images/Logo.png)
   # Mixed Reality Mobile Remoting
 
   A Unity plugin to preview Mixed Reality content directly on your HoloLens <i>and</i> Android phone in Play Mode, without building
@@ -14,11 +13,12 @@
 
 # Features
 * Preview Unity content, in play mode, on HoloLens and Android phones - no need to build! 
-* Join a [Holographic remoting](https://learn.microsoft.com/en-us/windows/mixed-reality/develop/native/holographic-remoting-player) session from your phone - view HoloLens content from a secondary device (third person POV)
-* Easy integration with existing Unity projects
+* Integrates with existing Unity projects
 * All-in-one editor tooling calibration and recording
 * Project-agnostic mobile companion app
 * Record video
+
+Similar to [Holographic Remoting](https://learn.microsoft.com/en-us/azure/remote-rendering/how-tos/unity/holographic-remoting) - but instead of being limited to HoloLens devices, you can also join on an AR-enabled Android device (thus enabling third person POV, from the perspective of the HoloLens)
 
 <br />
 
@@ -30,7 +30,13 @@ Some captures made using this tool:
 
 HoloLens and mobile app spatially aligned and viewing the same content:
 
-![Logo](Images/Overview.jpg)
+![Overview](Images/Overview.jpg)
+
+<br />
+
+Unity Editor tooling for connecting devices and recording
+
+![Editor tooling](Images/EditorTooling.png)
 
 
 # Installation
