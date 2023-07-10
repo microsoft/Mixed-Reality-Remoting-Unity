@@ -15,8 +15,6 @@ namespace MobileHolographicRemoting
 
         private Stack<GameObject> viewStack = new Stack<GameObject>();
 
-        private bool isSettingsVisible = true;
-
         private void OnEnable()
         {
             IdleView.SetActive(false);
