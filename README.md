@@ -41,7 +41,7 @@ Unity Editor tooling for connecting devices and recording
 
 # Installation
 The <i>host</i> components are available as UPM packages
-The Android companion app - xr-mobile-remoting-client-[version].apk 
+The Android companion app - mr-mobile-remoting-client-[version].apk 
 <!-- TODO - update for GitHub Both are available in [Mobile Remoting Pipeline Artifacts](TODO) -->
 
 ## In your Unity project: 
@@ -61,8 +61,8 @@ Skip this step if your project is already setup for HoloLens dev.
 ### 3. Install Microsoft.MixedReality.QR via Nuget
 *  https://www.nuget.org/Packages/Microsoft.MixedReality.QR
 
-### 4. Install XR Mobile via Unity Package Manager
-* Download <code>com.microsoft.mixedrealitystudios.xr-mobile-remoting.*</code> (where * is your desired version) from the [Releases](/Releases/) folder
+### 4. Install MR Mobile via Unity Package Manager
+* Download <code>com.microsoft.mixedrealitystudios.mr-mobile-remoting.*</code> (where * is your desired version) from the [Releases](/Releases/) folder
 * Follow same steps in step 2. 
 
 ## On your Android phone:
@@ -72,7 +72,7 @@ Skip this step if your project is already setup for HoloLens dev.
 
 # Usage
 ## 1. Add the runtime components to your scene
-* Open <code>Window > XR Mobile Remoting</code>
+* Open <code>Window > MR Mobile Remoting</code>
 * Click install components
 * Save scene and commit changes to git
 
@@ -84,7 +84,7 @@ Ensure you have the Android build tools installed via the Unity Hub.
   
 
 ### Unity Components
-* XR Mobile Remoting Editor Window - a single place to start the signalling server, set camera qualities and start recordings. Accessed via <code>Window > XR Mobile Remoting</code>
+* MR Mobile Remoting Editor Window - a single place to start the signalling server, set camera qualities and start recordings. Accessed via <code>Window > MR Mobile Remoting</code>
 * <code>MobileRemotingHost.prefab</code> - drop this in to scenes you want to view on the mobile AR app
 
 > NOTE: The setup will always require the project running in Unity and is not intended for standalone shared experience, i.e SpectatorView
@@ -94,15 +94,15 @@ Ensure you have the Android build tools installed via the Unity Hub.
 * AR compatible Android device (tested on Pixel 4)
 
 # Contributing
-## Publishing changes to XR Mobile Remoting Host (<code>ThirdPersonRemoting.Unity</code> project)
+## Publishing changes to MR Mobile Remoting Host (<code>ThirdPersonRemoting.Unity</code> project)
 ### 1. Modify directly from the Packages folder. Unity and Intellisense should all work as expected
 ### 2. Increment version
-* Select <code>Packages/XR Mobile Remoting/readme</code> and increment the version number using semantic versioning  
+* Select <code>Packages/MR Mobile Remoting/readme</code> and increment the version number using semantic versioning  
   ![Version bump](Images/VersionBumpInspector.png)
 * Update the CHANGELOG.md that resides in the same folder
 
 ### 3. Create .tgz package
-* <code>Tools > XR Mobile Remoting > Export UPM Package (.tgz)</code>. Select the <code>Releases</code> folder in the project root
+* <code>Tools > MR Mobile Remoting > Export UPM Package (.tgz)</code>. Select the <code>Releases</code> folder in the project root
 * Commit to repo and create PR.
 
 ### 4. Create git tag
