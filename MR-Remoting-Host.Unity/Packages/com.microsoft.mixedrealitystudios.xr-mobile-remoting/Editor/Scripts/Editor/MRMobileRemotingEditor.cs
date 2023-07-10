@@ -32,7 +32,10 @@ namespace MobileHolographicRemoting
         /// Editor pref keys
         /// </summary>
         private const string PrefsShowGettingStarted = "Remoting_ShowGettingStarted";
+        private const string PrefsShowCompanionApp = "Remoting_ShowCompanionApp";
         private const string PrefsShowConnection = "Remoting_ShowConnection";
+        private const string PrefsShowCameraFeeds = "Remoting_ShowCameraFeeds";
+        private const string PrefsShowRecordVideo = "Remoting_ShowRecordVideo";
         private const string PrefsServerPath = "Remoting_ServerPath";
         private const string PrefsFilename = "Remoting_Filename";
 
@@ -102,10 +105,22 @@ namespace MobileHolographicRemoting
 
             EditorGUIUtility.labelWidth = 200;
             scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
+
             DrawSectionInstructions();
+            DrawSectionDivider();
+
+            DrawSectionCompanionApp();
+            DrawSectionDivider();
+
             DrawSectionConnection();
+            DrawSectionDivider();
+
             DrawSectionCameraFeeds();
+            DrawSectionDivider();
+
             DrawSectionRecording();
+            DrawSectionDivider();
+
             EditorGUILayout.EndScrollView();
         }
 
@@ -142,15 +157,33 @@ namespace MobileHolographicRemoting
                 EditorGUILayout.LabelField("3. Install the mobile companion app on an Android phone");
                 EditorGUILayout.Space(10);
                 EditorGUILayout.LabelField("Session setup", EditorStyles.boldLabel);
-                EditorGUILayout.LabelField("1. Run the WebRTC signalling server running on this PC. You can use the tool below");
+                EditorGUILayout.LabelField("1. Run the WebRTC signalling server running on this PC. You can use the tool below (see section \"Connection\")");
                 EditorGUILayout.LabelField("2. (Optional) Connect the HoloLens to Holographic Remoting. Window > XR > Holographic Remoting for Play Mode");
                 EditorGUILayout.LabelField("3. Hit play mode in this Editor");
                 EditorGUILayout.LabelField("4. On mobile app: Enter this computer's IP address and tap \"Join\" on the ThirdPersonMobile app");
-                EditorGUILayout.Space(10);
-                DrawSectionDivider();
             }
             EditorGUILayout.EndFoldoutHeaderGroup();
             EditorPrefs.SetBool(PrefsShowGettingStarted, showFoldout);
+        }
+
+        private void DrawSectionCompanionApp()
+        {
+            bool showCompanionAppSection = EditorPrefs.GetBool(PrefsShowCompanionApp, true);
+            showCompanionAppSection = EditorGUILayout.BeginFoldoutHeaderGroup(showCompanionAppSection, "Companion App");
+
+            if (showCompanionAppSection)
+            {
+                string releases = "https://github.com/microsoft/Mixed-Reality-Remoting-Unity/releases";
+                string readme = "https://github.com/microsoft/Mixed-Reality-Remoting-Unity/blob/feature/documentation/README.md#on-your-android-phone";
+                EditorGUILayout.LabelField("Download and install the Android companion app from the GitHub releases page");
+
+                DrawLabelMessageButton("Download APK", "GitHub releases", "Open GitHub releases", () => Application.OpenURL(releases));
+                DrawLabelMessageButton("More info:", "Android installation instructions (README)", "Open README docs", () => Application.OpenURL(readme));
+                EditorGUILayout.Space(10);
+            }
+
+            EditorGUILayout.EndFoldoutHeaderGroup();
+            EditorPrefs.SetBool(PrefsShowCompanionApp, showCompanionAppSection);
         }
 
         private void DrawSectionConnection()
@@ -166,7 +199,6 @@ namespace MobileHolographicRemoting
                 DrawLabelMessageButtonButton("Node DSS Server path:", serverPath, "Locate Folder", OnPressLocateNodeDssFolder, "Start Server", OnPressStartServer);
                 DrawLabelMessageButton("This IP: (enter on mobile)", $"http://{ipAddress}:3000", "Refresh", () => ipAddress = GetLocalIPAddress());
                 DrawRunInBackground();
-                DrawSectionDivider();
             }
 
             EditorGUILayout.EndFoldoutHeaderGroup();
@@ -184,65 +216,79 @@ namespace MobileHolographicRemoting
 
         private void DrawSectionCameraFeeds()
         {
-            EditorGUILayout.LabelField("Camera Quality", EditorStyles.boldLabel);
-            bool streamResChanged = DrawResolutionDropdown("Streaming Camera Quality", ref mobileCamera.StreamResolution, "Resolution of the image hologram image streamed to the mobile. Also sets recording res. Reduced quality may improve performance/latency");
-            if (streamResChanged)
+            bool showSection = EditorPrefs.GetBool(PrefsShowCameraFeeds, true);
+            showSection = EditorGUILayout.BeginFoldoutHeaderGroup(showSection, "Camera Setup");
+
+            if (showSection)
             {
-                mobileCamera.ResetStreamRenderTexture();
+                EditorGUILayout.LabelField("Camera Quality", EditorStyles.boldLabel);
+                bool streamResChanged = DrawResolutionDropdown("Streaming Camera Quality", ref mobileCamera.StreamResolution, "Resolution of the image hologram image streamed to the mobile. Also sets recording res. Reduced quality may improve performance/latency");
+                if (streamResChanged)
+                {
+                    mobileCamera.ResetStreamRenderTexture();
+                }
+                EditorGUILayout.Space(10);
+                EditorGUILayout.LabelField("Cameras", EditorStyles.boldLabel);
+                EditorGUILayout.LabelField("Below are the camera images that will be recorded, in to two separate files");
+                GUILayout.BeginHorizontal();
+                DrawCamTextureGroup("Scene Camera (used for recording)", mobileCamera.StreamCamera.targetTexture);
+                GUI.enabled = Application.isPlaying;
+                DrawCamTextureGroup("Mobile Camera Feed", textureReceiver.mostRecentTexture, "Update Preview Image", OnPressUpdatePreviewImage);
+                GUI.enabled = true;
+                GUILayout.EndHorizontal();
             }
-            EditorGUILayout.Space(10);
-            EditorGUILayout.LabelField("Cameras", EditorStyles.boldLabel);
-            EditorGUILayout.LabelField("Below are the camera images that will be recorded, in to two separate files");
-            GUILayout.BeginHorizontal();
-            DrawCamTextureGroup("Scene Camera (used for recording)", mobileCamera.StreamCamera.targetTexture);
-            GUI.enabled = Application.isPlaying;
-            DrawCamTextureGroup("Mobile Camera Feed", textureReceiver.mostRecentTexture, "Update Preview Image", OnPressUpdatePreviewImage);
-            GUI.enabled = true;
-            GUILayout.EndHorizontal();
+            EditorGUILayout.EndFoldoutHeaderGroup();
+            EditorPrefs.SetBool(PrefsShowCameraFeeds, showSection);
         }
 
         private void DrawSectionRecording()
         {
-            EditorGUILayout.LabelField("Recording", EditorStyles.boldLabel);
-            EditorGUILayout.LabelField("When you hit record the files will end up in two different locations:");
-            EditorGUILayout.LabelField("1. Scene Camera (left image) - will be saved on this PC");
-            EditorGUILayout.LabelField("2. Mobile Camera (right image) - will be saved on the mobile phone");
-            EditorGUILayout.Space(10);
+            bool showSection = EditorPrefs.GetBool(PrefsShowRecordVideo, true);
+            showSection = EditorGUILayout.BeginFoldoutHeaderGroup(showSection, "Record Video");
 
-            recordingFilename = EditorGUILayout.TextField("Filename", EditorPrefs.GetString(PrefsFilename, "MRMobileSceneCamera"));
-            EditorPrefs.SetString(PrefsFilename, recordingFilename);
-
-            EditorGUILayout.Space(10);
-            EditorGUILayout.LabelField("Recordings will be saved to..", EditorStyles.boldLabel);
-            DrawLabelMessageButton("Scene Camera", GetLocalRecordingPath() + ".mp4", "Open Folder", OnPressOpenHologramFolder);
-            DrawLabelMessageButton("Mobile Camera", GetMobileRecordingPath());
-
-            GUILayout.BeginHorizontal();
-
-            GUI.enabled = Application.isPlaying;
-            if (GUILayout.Button(isRecording ? "Stop Recording" : "Start Recording"))
+            if (showSection)
             {
-                if (isRecording)
-                {
-                    OnPressStopRecording();
-                }
-                else
-                {
-                    OnPressStartRecording();
-                }
-            }
-            GUI.enabled = true;
+                EditorGUILayout.LabelField("When you hit record the files will end up in two different locations:");
+                EditorGUILayout.LabelField("1. Scene Camera (left image) - will be saved on this PC");
+                EditorGUILayout.LabelField("2. Mobile Camera (right image) - will be saved on the mobile phone");
+                EditorGUILayout.Space(10);
 
-            GUILayout.EndHorizontal();
-            EditorGUILayout.Space(10);
+                recordingFilename = EditorGUILayout.TextField("Filename", EditorPrefs.GetString(PrefsFilename, "MRMobileSceneCamera"));
+                EditorPrefs.SetString(PrefsFilename, recordingFilename);
+
+                EditorGUILayout.Space(10);
+                EditorGUILayout.LabelField("Recordings will be saved to..", EditorStyles.boldLabel);
+                DrawLabelMessageButton("Scene Camera", GetLocalRecordingPath() + ".mp4", "Open Folder", OnPressOpenHologramFolder);
+                DrawLabelMessageButton("Mobile Camera", GetMobileRecordingPath());
+
+                GUILayout.BeginHorizontal();
+
+                GUI.enabled = Application.isPlaying;
+                if (GUILayout.Button(isRecording ? "Stop Recording" : "Start Recording"))
+                {
+                    if (isRecording)
+                    {
+                        OnPressStopRecording();
+                    }
+                    else
+                    {
+                        OnPressStartRecording();
+                    }
+                }
+                GUI.enabled = true;
+
+                GUILayout.EndHorizontal();
+
+            }
+
+            EditorGUILayout.EndFoldoutHeaderGroup();
+            EditorPrefs.SetBool(PrefsShowRecordVideo, showSection);
         }
 
         private static void DrawSectionDivider()
         {
-            EditorGUILayout.Space(20);
             Rect rect = EditorGUILayout.GetControlRect(true, 1);
-            EditorGUI.DrawRect(rect, new Color(1f, 1f, 1f, 0.3f));
-            EditorGUILayout.Space(10);
+            EditorGUI.DrawRect(rect, new Color(1f, 1f, 1f, 0.13f));
         }
 
         private void DrawCamTextureGroup(string label, Texture texture, string buttonLabel = null, Action onButtonPress = null)
@@ -285,18 +331,19 @@ namespace MobileHolographicRemoting
 
         private static void DrawLabelMessageButtonButton(string label, string message, string buttonText1 = null, Action onButtonPress1 = null, string buttonText2 = null, Action onButtonPress2 = null)
         {
+            int buttonWidth = 140;
             GUILayout.BeginHorizontal();
             EditorGUILayout.LabelField(label, message, GUILayout.Width(800));
             if (!string.IsNullOrEmpty(buttonText1))
             {
-                if (GUILayout.Button(buttonText1, GUILayout.Width(130)))
+                if (GUILayout.Button(buttonText1, GUILayout.Width(buttonWidth)))
                 {
                     onButtonPress1?.Invoke();
                 }
             }
             if (!string.IsNullOrEmpty(buttonText2))
             {
-                if (GUILayout.Button(buttonText2, GUILayout.Width(130)))
+                if (GUILayout.Button(buttonText2, GUILayout.Width(buttonWidth)))
                 {
                     onButtonPress2?.Invoke();
                 }
@@ -336,6 +383,8 @@ namespace MobileHolographicRemoting
             GUILayout.EndHorizontal();
             return value;
         }
+
+
 
         private static T FindObjectOfTypeWithError<T>() where T : UnityEngine.Object
         {
