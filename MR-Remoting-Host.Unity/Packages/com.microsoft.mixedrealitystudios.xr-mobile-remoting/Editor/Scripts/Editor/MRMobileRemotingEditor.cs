@@ -342,7 +342,7 @@ namespace MobileHolographicRemoting
             T obj = FindObjectOfType<T>();
             if (obj == null)
             {
-                Debug.LogError("Could not find object in current scene with type: " + typeof(T));
+                Debug.LogWarning($"[MRMobileRemoting]: Could not find object in current scene with type: {typeof(T)}. Try installing components first");
             }
             return obj;
         }
@@ -357,7 +357,7 @@ namespace MobileHolographicRemoting
                     return ip.ToString();
                 }
             }
-            throw new System.Exception("No network adapters with an IPv4 address in the system!");
+            throw new System.Exception("[MRMobileRemoting]: No network adapters with an IPv4 address in the system!");
         }
 
         private string GetLocalRecordingPath()
