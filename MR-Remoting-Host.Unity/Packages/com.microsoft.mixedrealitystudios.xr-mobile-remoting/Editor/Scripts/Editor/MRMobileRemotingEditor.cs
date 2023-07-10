@@ -148,6 +148,8 @@ namespace MobileHolographicRemoting
 
             if (showFoldout)
             {
+                BeginVerticalPadded();
+
                 EditorGUILayout.LabelField("This tool enables a mobile phone to join and a Holographic Remoting session");
                 EditorGUILayout.Space(10);
 
@@ -161,6 +163,8 @@ namespace MobileHolographicRemoting
                 EditorGUILayout.LabelField("2. (Optional) Connect the HoloLens to Holographic Remoting. Window > XR > Holographic Remoting for Play Mode");
                 EditorGUILayout.LabelField("3. Hit play mode in this Editor");
                 EditorGUILayout.LabelField("4. On mobile app: Enter this computer's IP address and tap \"Join\" on the ThirdPersonMobile app");
+
+                EndVerticalPadded();
             }
             EditorGUILayout.EndFoldoutHeaderGroup();
             EditorPrefs.SetBool(PrefsShowGettingStarted, showFoldout);
@@ -173,13 +177,15 @@ namespace MobileHolographicRemoting
 
             if (showCompanionAppSection)
             {
+                BeginVerticalPadded();
                 string releases = "https://github.com/microsoft/Mixed-Reality-Remoting-Unity/releases";
                 string readme = "https://github.com/microsoft/Mixed-Reality-Remoting-Unity/blob/feature/documentation/README.md#on-your-android-phone";
                 EditorGUILayout.LabelField("Download and install the Android companion app from the GitHub releases page");
 
                 DrawLabelMessageButton("Download APK", "GitHub releases", "Open GitHub releases", () => Application.OpenURL(releases));
                 DrawLabelMessageButton("More info:", "Android installation instructions (README)", "Open README docs", () => Application.OpenURL(readme));
-                EditorGUILayout.Space(10);
+
+                EndVerticalPadded();
             }
 
             EditorGUILayout.EndFoldoutHeaderGroup();
@@ -193,12 +199,16 @@ namespace MobileHolographicRemoting
 
             if (showConnectionSection)
             {
+                BeginVerticalPadded();
+                
                 string serverPath = EditorPrefs.GetString(PrefsServerPath, "[not set]");
                 EditorGUILayout.LabelField("You'll need a signalling server running on this PC. Download one here: https://github.com/bengreenier/node-dss");
                 EditorGUILayout.Space(10);
                 DrawLabelMessageButtonButton("Node DSS Server path:", serverPath, "Locate Folder", OnPressLocateNodeDssFolder, "Start Server", OnPressStartServer);
                 DrawLabelMessageButton("This IP: (enter on mobile)", $"http://{ipAddress}:3000", "Refresh", () => ipAddress = GetLocalIPAddress());
                 DrawRunInBackground();
+                
+                EndVerticalPadded();
             }
 
             EditorGUILayout.EndFoldoutHeaderGroup();
@@ -221,6 +231,8 @@ namespace MobileHolographicRemoting
 
             if (showSection)
             {
+                BeginVerticalPadded();
+
                 EditorGUILayout.LabelField("Camera Quality", EditorStyles.boldLabel);
                 bool streamResChanged = DrawResolutionDropdown("Streaming Camera Quality", ref mobileCamera.StreamResolution, "Resolution of the image hologram image streamed to the mobile. Also sets recording res. Reduced quality may improve performance/latency");
                 if (streamResChanged)
@@ -236,6 +248,8 @@ namespace MobileHolographicRemoting
                 DrawCamTextureGroup("Mobile Camera Feed", textureReceiver.mostRecentTexture, "Update Preview Image", OnPressUpdatePreviewImage);
                 GUI.enabled = true;
                 GUILayout.EndHorizontal();
+             
+                EndVerticalPadded();
             }
             EditorGUILayout.EndFoldoutHeaderGroup();
             EditorPrefs.SetBool(PrefsShowCameraFeeds, showSection);
@@ -248,7 +262,9 @@ namespace MobileHolographicRemoting
 
             if (showSection)
             {
+                BeginVerticalPadded();
                 EditorGUILayout.LabelField("When you hit record the files will end up in two different locations:");
+
                 EditorGUILayout.LabelField("1. Scene Camera (left image) - will be saved on this PC");
                 EditorGUILayout.LabelField("2. Mobile Camera (right image) - will be saved on the mobile phone");
                 EditorGUILayout.Space(10);
@@ -278,7 +294,8 @@ namespace MobileHolographicRemoting
                 GUI.enabled = true;
 
                 GUILayout.EndHorizontal();
-
+                
+                EndVerticalPadded();
             }
 
             EditorGUILayout.EndFoldoutHeaderGroup();
@@ -384,7 +401,16 @@ namespace MobileHolographicRemoting
             return value;
         }
 
+        private static void BeginVerticalPadded()
+        {
+            GUIStyle padding = new GUIStyle() { padding = new RectOffset(18, 0, 0, 0) };
+            GUILayout.BeginVertical(padding);
+        }
 
+        private static void EndVerticalPadded()
+        {
+            GUILayout.EndVertical();
+        }
 
         private static T FindObjectOfTypeWithError<T>() where T : UnityEngine.Object
         {
