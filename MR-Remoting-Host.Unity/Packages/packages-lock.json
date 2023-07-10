@@ -49,7 +49,7 @@
       "source": "local-tarball",
       "dependencies": {}
     },
-    "com.microsoft.mixedrealitystudios.xr-mobile-remoting": {
+    "com.microsoft.mixedrealitystudios.mr-mobile-remoting": {
       "version": "file:com.microsoft.mixedrealitystudios.xr-mobile-remoting",
       "depth": 0,
       "source": "embedded",
