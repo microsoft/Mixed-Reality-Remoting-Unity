@@ -1,10 +1,10 @@
 {
   "name": "com.microsoft.mixedrealitystudios.xr-mobile-remoting",
   "version": "0.4.1",
-  "displayName": "MRS XR Mobile Remoting",
-  "description": "MRS XR Mobile Remoting enables you to view and record a HoloLens scene (rendered in Unity play mode) on an Android phone with two component output:\n1. 3D scene content up to 4K\n2: Front-facing phone camera video",
-  "documentationUrl": "https://wwhs.visualstudio.com/SharedIP/_git/MobileRemoting/",
-  "changelogUrl": "https://wwhs.visualstudio.com/SharedIP/_git/MobileRemoting?path=/CHANGELOG.md",
+  "displayName": "MR Mobile Remoting",
+  "description": "MR Mobile Remoting enables you to view and record a HoloLens scene (rendered in Unity play mode) on an Android phone with two component output:\n1. 3D scene content up to 4K\n2: Front-facing phone camera video",
+  "documentationUrl": "https://github.com/microsoft/Mixed-Reality-Remoting-Unity/",
+  "changelogUrl": "https://github.com/microsoft/Mixed-Reality-Remoting-Unity/blob/main/CHANGELOG.md",
   "keywords": [
     "mixed-reality"
   ],
@@ -14,8 +14,8 @@
     "com.microsoft.mixedreality.webrtc": "2.0.2"
   },
   "author": {
-    "name": "Mixed Reality Studios",
+    "name": "Mark Nguyen | Microsoft",
     "email": "manguyen@microsoft.com",
-    "url": "https://wwhs.visualstudio.com/SharedIP/_git/MobileRemoting/"
+    "url": "https://www.microsoft.com/"
   }
 }

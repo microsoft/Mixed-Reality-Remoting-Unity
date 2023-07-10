@@ -14,7 +14,7 @@ namespace MobileHolographicRemoting
     /// <summary>
     /// Editor window for third person remoting
     /// </summary>
-    public class XRMobileRemotingEditor : EditorWindow
+    public class MRMobileRemotingEditor : EditorWindow
     {
         /// <summary>
         /// Window display config
@@ -46,10 +46,10 @@ namespace MobileHolographicRemoting
         private bool didInitialiseSuccessfully;
         private GameViewRecorder gameViewRecorder;
 
-        [MenuItem("Window/XR Mobile Remoting")]
+        [MenuItem("Window/MR Mobile Remoting")]
         static void Init()
         {
-            XRMobileRemotingEditor window = (XRMobileRemotingEditor)EditorWindow.GetWindow(typeof(XRMobileRemotingEditor), false, WindowTitle);
+            MRMobileRemotingEditor window = (MRMobileRemotingEditor)EditorWindow.GetWindow(typeof(MRMobileRemotingEditor), false, WindowTitle);
             window.Show();
         }
 
@@ -74,7 +74,7 @@ namespace MobileHolographicRemoting
 
             if (!didInitialiseSuccessfully)
             {
-                Debug.LogError("XRMobileRemotingEditor did not initialise properly");
+                Debug.LogError("MRMobileRemotingEditor did not initialise properly");
             }
         }
 
@@ -209,7 +209,7 @@ namespace MobileHolographicRemoting
             EditorGUILayout.LabelField("2. Mobile Camera (right image) - will be saved on the mobile phone");
             EditorGUILayout.Space(10);
 
-            recordingFilename = EditorGUILayout.TextField("Filename", EditorPrefs.GetString(PrefsFilename, "XRMobileSceneCamera"));
+            recordingFilename = EditorGUILayout.TextField("Filename", EditorPrefs.GetString(PrefsFilename, "MRMobileSceneCamera"));
             EditorPrefs.SetString(PrefsFilename, recordingFilename);
 
             EditorGUILayout.Space(10);
