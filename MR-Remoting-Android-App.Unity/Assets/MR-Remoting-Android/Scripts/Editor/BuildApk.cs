@@ -37,7 +37,7 @@ public class BuildApk
             string commandLineTargetFolder = GetTargetFolder();
             if (!string.IsNullOrEmpty(commandLineTargetFolder))
             {
-                filePath = Path.Combine(commandLineTargetFolder, ApkFileName);
+                filePath = Path.Combine(commandLineTargetFolder, ApkFileName + ".apk");
             }
         }
         else
@@ -51,15 +51,18 @@ public class BuildApk
     [MenuItem("Tools/Build MR Remoting Android APK")]
     static void Build()
     {
-        string filePath = GetBuildFilePath();
-        if (string.IsNullOrEmpty(filePath))
+        string buildPath = GetBuildFilePath();
+        Debug.Log("Build path: " + buildPath);
+
+        if (string.IsNullOrEmpty(buildPath))
         {
+            Debug.LogError("Build path is null or empty. Build skipped");
             return;
         }
 
         BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
         buildPlayerOptions.scenes = Scenes;
-        buildPlayerOptions.locationPathName = filePath;
+        buildPlayerOptions.locationPathName = buildPath;
         buildPlayerOptions.target = BuildTarget.Android;
         buildPlayerOptions.options = BuildOptions.None;
 
@@ -74,6 +77,11 @@ public class BuildApk
         if (summary.result == BuildResult.Failed)
         {
             Debug.LogError($"Build {report.summary.result} with {report.summary.totalErrors} errors.");
+        }
+
+        if (Application.isBatchMode)
+        {
+            EditorApplication.Exit(0);
         }
     }
 }

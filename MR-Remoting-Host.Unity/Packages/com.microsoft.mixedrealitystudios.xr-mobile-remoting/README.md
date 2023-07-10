@@ -1,3 +1,3 @@
-# XR Mobile Remoting
+# MR Mobile Remoting
 
-Docs, releases and code: https://wwhs.visualstudio.com/SharedIP/_git/MobileRemoting
+Docs, releases and code: https://github.com/microsoft/Mixed-Reality-Remoting-Unity

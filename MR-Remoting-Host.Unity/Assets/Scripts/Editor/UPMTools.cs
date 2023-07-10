@@ -15,46 +15,54 @@ namespace MRMobileRemoting
 
         private static PackRequest request;
 
-        /// <summary>
-        /// Display a save in folder.. UI prompt and create a UPM at the selected folder
-        /// </summary>
         [MenuItem("Tools/MR Mobile Remoting/Export UPM Package (.tgz)")]
-        public static void CreatePackageWithUI()
+        static void CreatePackage()
         {
-            string releasesFolder = Path.GetFullPath(Path.Combine(Application.dataPath, "../Releases/"));
-            string targetFolder = EditorUtility.OpenFolderPanel("Select a folder to export package..", releasesFolder, "");
-            if (!string.IsNullOrEmpty(targetFolder))
+            string path = GetBuildPath();
+
+            if (string.IsNullOrEmpty(path))
             {
-                CreatePackage(targetFolder);
+                return;
             }
+
+            string packageFolder = Path.GetFullPath(PathToPackage);
+            EditorApplication.update += EditorUpdate;
+            request = Client.Pack(packageFolder, path);
         }
 
-        public static void CreatePackageCmdLine()
+        static string GetBuildPath()
+        {
+            string path = string.Empty;
+            if (Application.isBatchMode)
+            {
+                path = GetTargetFolder();
+            }
+            else
+            {
+                string releasesFolder = Path.GetFullPath(Path.Combine(Application.dataPath, "../"));
+                path = EditorUtility.OpenFolderPanel("Select a folder to export package..", releasesFolder, "");
+            }
+
+            return path;
+        }
+
+        static string GetTargetFolder()
         {
             string[] args = Environment.GetCommandLineArgs();
             for (int i = 0; i < args.Length; i++)
             {
-                Debug.Log("ARG " + i + ": " + args[i]);
                 if (args[i] == "-TargetFolder")
                 {
                     string targetFolder = args[i + 1];
-                    CreatePackage(targetFolder);
-                    return;
+                    return targetFolder;
                 }
             }
 
-            Debug.LogError("-TargetFolder not set via command line argument - not creating the UPM package");
+            Debug.LogError("-TargetFolder not set via command line argument");
+            return string.Empty;
         }
 
-        private static void CreatePackage(string targetFolder)
-        {
-            string packageFolder = Path.GetFullPath(PathToPackage);
-
-            EditorApplication.update += EditorUpdate;
-            request = Client.Pack(packageFolder, targetFolder);
-        }
-
-        private static void EditorUpdate()
+        static void EditorUpdate()
         {
             if (request.IsCompleted)
             {
@@ -67,6 +75,11 @@ namespace MRMobileRemoting
                     Debug.LogWarning("An error occurred when creating package");
                 }
                 EditorApplication.update -= EditorUpdate;
+
+                if (Application.isBatchMode)
+                {
+                    EditorApplication.Exit(0);
+                }
             }
         }
     }
