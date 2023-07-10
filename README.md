@@ -76,9 +76,7 @@ Skip this step if your project is already setup for HoloLens dev.
 ## 2. Build the Android app
 Ensure you have the Android build tools installed via the Unity Hub.
 * Open the MR-Remoting-Android-App.unity project.
-* Modify the IP address in NodeDssSignaler
-* Build and Run
-  
+* Tools > Build MR Remoting Android APK
 
 ### Unity Components
 * MR Mobile Remoting Editor Window - a single place to start the signalling server, set camera qualities and start recordings. Accessed via <code>Window > MR Mobile Remoting</code>

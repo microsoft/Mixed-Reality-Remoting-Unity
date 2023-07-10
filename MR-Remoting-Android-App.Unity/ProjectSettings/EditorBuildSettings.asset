@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/MobileHolographicRemotingClient/Scenes/main.unity
+    path: Assets/MR-Remoting-Android/Scenes/main.unity
     guid: 6bdce89659816455b9f906fc62d19910
   m_configObjects:
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: 744b813df90924c169af73489b8325de,

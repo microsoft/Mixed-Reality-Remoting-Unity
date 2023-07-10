@@ -1,38 +1,26 @@
 using UnityEditor;
 using UnityEngine;
 using UnityEditor.Build.Reporting;
-using System;
 using System.IO;
 
 public class BuildApk
 {
     static readonly string[] Scenes = {
-        "Assets/MobileHolographicRemotingClient/Scenes/main.unity"
+        "Assets/MR-Remoting-Android/Scenes/main.unity"
     };
 
-    static string GetTargetFolder()
-    {
-        string[] args = Environment.GetCommandLineArgs();
-        for (int i = 0; i < args.Length; i++)
-        {
-            if (args[i] == "-TargetFolder")
-            {
-                string targetFolder = args[i + 1];
-                return targetFolder;
-            }
-        }
-
-        Debug.LogError("-TargetFolder not set via command line argument");
-        return string.Empty;
-    }
-
-    [MenuItem("Build APK/Build")]
+    [MenuItem("Tools/Build MR Remoting Android APK")]
     static void Build()
     {
-        string targetFolder = GetTargetFolder();
+        string projectFolder = Path.GetDirectoryName(Application.dataPath);
+        string savePath = EditorUtility.SaveFilePanel("Build .apk file", projectFolder, "mr-remoting-android-app", "apk");
+        if (string.IsNullOrWhiteSpace(savePath))
+        {
+            return;
+        }
         BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
         buildPlayerOptions.scenes = Scenes;
-        buildPlayerOptions.locationPathName = Path.Combine(targetFolder, "build.apk");
+        buildPlayerOptions.locationPathName = savePath;
         buildPlayerOptions.target = BuildTarget.Android;
         buildPlayerOptions.options = BuildOptions.None;
 
@@ -47,7 +35,6 @@ public class BuildApk
         if (summary.result == BuildResult.Failed)
         {
             Debug.LogError($"Build {report.summary.result} with {report.summary.totalErrors} errors.");
-            EditorApplication.Exit(1);
         }
     }
 }
