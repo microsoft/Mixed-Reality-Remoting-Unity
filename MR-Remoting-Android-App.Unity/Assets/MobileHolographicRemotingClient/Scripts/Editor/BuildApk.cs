@@ -29,12 +29,6 @@ public class BuildApk
     [MenuItem("Build APK/Build")]
     static void Build()
     {
-        string debugPath = "C:/Program Files/Unity/Hub/Editor/2020.3.20f1/Editor/Data/PlaybackEngines/AndroidPlayer";
-        foreach (string file in Directory.EnumerateFiles(debugPath, "*.*", SearchOption.AllDirectories))
-        {
-            Debug.Log(file);
-        }
-
         string targetFolder = GetTargetFolder();
         BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
         buildPlayerOptions.scenes = Scenes;
