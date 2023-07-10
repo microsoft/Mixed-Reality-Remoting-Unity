@@ -9,7 +9,7 @@ using UnityEditor;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
-namespace MobileHolographicRemoting
+namespace MRMobileRemoting
 {
     /// <summary>
     /// Editor window for third person remoting
@@ -20,7 +20,7 @@ namespace MobileHolographicRemoting
         /// Window display config
         /// </summary>
         private const float MaxWidthCameraImage = 480;
-        private const string WindowTitle = "XR Mobile Remoting";
+        private const string WindowTitle = "MR Mobile Remoting";
         private const string TagRecordingCamera = "RecordingCamera";
 
         /// <summary>
@@ -127,7 +127,7 @@ namespace MobileHolographicRemoting
         private void DrawSectionInstallComponents()
         {
             EditorGUILayout.LabelField("Scene Requires Additional Components", EditorStyles.boldLabel);
-            EditorGUILayout.LabelField("Click the button below to add a prefab containing the required components to enable an XR Mobile remoting session");
+            EditorGUILayout.LabelField("Click the button below to add a prefab containing the required components to enable an MR Mobile remoting session");
             if (GUILayout.Button("Install Components in to current scene", GUILayout.Width(250)))
             {
                 GameObject prefab = (GameObject)AssetDatabase.LoadAssetAtPath(PrefabPath, typeof(GameObject));

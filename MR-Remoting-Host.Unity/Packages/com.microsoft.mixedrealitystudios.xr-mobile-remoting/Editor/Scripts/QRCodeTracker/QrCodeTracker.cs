@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MobileHolographicRemoting
+namespace MRMobileRemoting
 {
     public delegate void QRCodeFunction(QRCode qrCode);
 

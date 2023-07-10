@@ -1,7 +1,7 @@
 using Microsoft.MixedReality.QR;
 using UnityEngine;
 
-namespace MobileHolographicRemoting
+namespace MRMobileRemoting
 {
     public class QrAlignment : MonoBehaviour
     {

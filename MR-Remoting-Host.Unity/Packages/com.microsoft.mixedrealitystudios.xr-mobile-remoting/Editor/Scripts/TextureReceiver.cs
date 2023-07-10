@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using PeerConnection = Microsoft.MixedReality.WebRTC.Unity.PeerConnection;
 
-namespace MobileHolographicRemoting
+namespace MRMobileRemoting
 {
     [Serializable]
     public class TextureReceivedEvent : UnityEvent<Texture2D> { }

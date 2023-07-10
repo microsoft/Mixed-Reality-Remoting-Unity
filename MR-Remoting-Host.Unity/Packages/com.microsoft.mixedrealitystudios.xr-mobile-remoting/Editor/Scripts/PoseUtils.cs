@@ -2,7 +2,7 @@
 
 using UnityEngine;
 
-namespace MobileHolographicRemoting
+namespace MRMobileRemoting
 {
     using System;
     using UnityEngine;

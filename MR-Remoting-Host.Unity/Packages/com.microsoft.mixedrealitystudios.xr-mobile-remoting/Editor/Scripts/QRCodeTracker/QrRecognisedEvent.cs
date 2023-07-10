@@ -4,7 +4,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace MobileHolographicRemoting
+namespace MRMobileRemoting
 {
     [Serializable]
     public class QrRecognisedEvent : UnityEvent<Pose> { }

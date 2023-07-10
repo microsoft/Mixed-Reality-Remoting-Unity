@@ -6,7 +6,7 @@ using UnityEditor.Recorder;
 using UnityEditor.Recorder.Input;
 using UnityEngine;
 
-namespace MobileHolographicRemoting
+namespace MRMobileRemoting
 {
     public class GameViewRecorder
     {

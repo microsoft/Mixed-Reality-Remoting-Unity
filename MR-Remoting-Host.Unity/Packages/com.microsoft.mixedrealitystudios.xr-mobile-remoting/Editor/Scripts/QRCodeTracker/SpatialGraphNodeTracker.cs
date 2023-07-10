@@ -1,7 +1,7 @@
 using Microsoft.MixedReality.OpenXR;
 using UnityEngine;
 
-namespace MobileHolographicRemoting
+namespace MRMobileRemoting
 {
     public class SpatialGraphNodeTracker : MonoBehaviour
     {

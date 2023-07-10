@@ -7,7 +7,7 @@ using UnityEditor.PackageManager;
 using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 
-namespace MobileHolographicRemoting
+namespace MRMobileRemoting
 {
     public static class UPMTools
     {
@@ -18,7 +18,7 @@ namespace MobileHolographicRemoting
         /// <summary>
         /// Display a save in folder.. UI prompt and create a UPM at the selected folder
         /// </summary>
-        [MenuItem("Tools/XR Mobile Remoting/Export UPM Package (.tgz)")]
+        [MenuItem("Tools/MR Mobile Remoting/Export UPM Package (.tgz)")]
         public static void CreatePackageWithUI()
         {
             string releasesFolder = Path.GetFullPath(Path.Combine(Application.dataPath, "../Releases/"));

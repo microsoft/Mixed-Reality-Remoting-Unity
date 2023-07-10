@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using UnityEngine;
 
-namespace MobileHolographicRemoting
+namespace MRMobileRemoting
 {
     public static class CameraResolution
     {

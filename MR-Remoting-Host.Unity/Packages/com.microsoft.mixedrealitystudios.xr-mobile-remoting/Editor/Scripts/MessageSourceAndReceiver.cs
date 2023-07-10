@@ -7,7 +7,7 @@ using System.Collections.Concurrent;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace MobileHolographicRemoting
+namespace MRMobileRemoting
 {
     /// <summary>
     /// Ability to send and receive messages over a DataChannel.

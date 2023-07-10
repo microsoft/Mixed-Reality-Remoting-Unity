@@ -2,7 +2,7 @@
 
 using UnityEngine;
 
-namespace MobileHolographicRemoting
+namespace MRMobileRemoting
 {
     /// <summary>
     /// Component attached to the camera that represents the AR mobile phone in this scene's world.
