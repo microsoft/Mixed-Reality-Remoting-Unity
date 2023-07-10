@@ -1,0 +1,21 @@
+{
+  "name": "com.microsoft.mixedrealitystudios.mr-mobile-remoting",
+  "version": "0.0.1",
+  "displayName": "MR Mobile Remoting",
+  "description": "MR Mobile Remoting enables you to view and record a HoloLens scene (rendered in Unity play mode) on an Android phone with two component output:\n1. 3D scene content up to 4K\n2: Front-facing phone camera video",
+  "documentationUrl": "https://github.com/microsoft/Mixed-Reality-Remoting-Unity/",
+  "changelogUrl": "https://github.com/microsoft/Mixed-Reality-Remoting-Unity/blob/main/CHANGELOG.md",
+  "keywords": [
+    "mixed-reality"
+  ],
+  "dependencies": {
+    "com.unity.recorder": "2.5.7",
+    "com.microsoft.mixedreality.openxr": "1.4.0",
+    "com.microsoft.mixedreality.webrtc": "2.0.2"
+  },
+  "author": {
+    "name": "Mark Nguyen | Microsoft",
+    "email": "manguyen@microsoft.com",
+    "url": "https://www.microsoft.com/"
+  }
+}

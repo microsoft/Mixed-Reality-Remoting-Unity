@@ -1,0 +1,38 @@
+{
+    "name": "microsoft.mixedreality.mrs-xr-mobile-remoting",
+    "rootNamespace": "",
+    "references": [
+        "GUID:73d456c551e58394a94a92ad9cd538db",
+        "GUID:832a8ef6e615e9a41a5076e1c9a43782",
+        "GUID:d87af21afaaf27f45b873a9ab462bcbb",
+        "GUID:847b179520b009e4c8d15c296b1cbf35"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [
+        "Android",
+        "CloudRendering",
+        "GameCoreScarlett",
+        "GameCoreXboxOne",
+        "iOS",
+        "LinuxStandalone64",
+        "Lumin",
+        "macOSStandalone",
+        "PS4",
+        "PS5",
+        "Stadia",
+        "Switch",
+        "tvOS",
+        "WSA",
+        "WebGL",
+        "WindowsStandalone32",
+        "WindowsStandalone64",
+        "XboxOne"
+    ],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

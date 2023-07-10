@@ -1,0 +1,19 @@
+{
+    "name": "QRCodeTracker",
+    "rootNamespace": "",
+    "references": [
+        "GUID:3b76ab8242cc35d479edf0a949d56d59",
+        "GUID:a6462cc487b34c15be5e40757b5c848c",
+        "GUID:db18615726f95db48a173643e980a2b0",
+        "GUID:c07adb8a81c425743b901c73a99547ae"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
